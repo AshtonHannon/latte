@@ -27,11 +27,10 @@ class ClientHandler implements Runnable {
 			HTTPRequest request = RequestParser.parse(inputStream);
 
 			/* Route the incoming request to it's desination */
-			HTTPResponse res = this.router.route(request);
+			HTTPResponse response = this.router.route(request);
 
-			// Send a basic HTTP response back to the client
-			String response = "HTTP/1.1 200 OK\r\nContent-Length: 12\r\n\r\nHello, World!";
-			outputStream.write(response.getBytes());
+			/* Write the response to the output stream to return response */
+			outputStream.write(response.getResponse().getBytes());
 
 		} catch (IOException e) {
 			e.printStackTrace();
